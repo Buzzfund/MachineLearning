@@ -1,7 +1,16 @@
 # MachineLearning
 Testing machine learning techniques on the market
 
-*Language:* Python
+## Languages
+
+Python
+
+## Requirements
+
+```
+    pip install -r requirements
+```
+
 
 ## Random Forest
 
@@ -13,7 +22,7 @@ Meant to output chance of upward movement in 1 week. Will likely use regression 
 
 ### Data format
 
-*x = Sector, EPS, P/E, Current Ratio, Zack Rank, RSI, Volume.*
+*x = Sector, EPS, P/E, Current Ratio, Zack Rank, RSI, 1 Week Volume, 1 Month Volume, 2 Week Gain, 1 Week Gain, 1 Month Gain.*
 *y = 1 week movement*
 
 In order for movement to be considered positive, it must surpass a threshold positive movement. i.e. +1.5%
