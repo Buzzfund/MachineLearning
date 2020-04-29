@@ -5,10 +5,10 @@ Testing machine learning techniques on the market
 
 ## Random Forest
 
-Meant to output chance of upward movement in 1 week. Will likely use regression decision tree as weak learner. 
+Meant to output chance of upward movement in 1 week. Will likely use regression decision tree as weak learner. Logistic activation function:
 
 ```math
-SE = \frac{\sigma}{\sqrt{n}}
+    f(x) = 1/(1+e^-x)
 ```
 
 ### Data format
