@@ -5,7 +5,11 @@ Testing machine learning techniques on the market
 
 ## Random Forest
 
-Meant to output chance of upward movement in 1 week. Will likely use regression decision tree as weak learner.
+Meant to output chance of upward movement in 1 week. Will likely use regression decision tree as weak learner. 
+
+```math
+SE = \frac{\sigma}{\sqrt{n}}
+```
 
 ### Data format
 
