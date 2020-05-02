@@ -55,7 +55,8 @@ def getSector(tickers):
         if len(sublist) > 1: 
             profiles = fetched_data['companyProfiles']
         else:
-            profiles = fetched_data
+            profiles = [fetched_data]
+        #print(profiles)
         for i in range(0, len(profiles)):
             data[profiles[i]['symbol']]["sector"] = profiles[i]['profile']['sector']
 
@@ -77,7 +78,9 @@ def main():
     print("Fetching ticker sectors...")
     getSector(tickers)
 
-    print(data)
+    #print(indexListByThree(tickers))
+
+    #print(data)
 
         
         
