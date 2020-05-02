@@ -1,7 +1,11 @@
+# Using Scikit as primary ML library
+
 import numpy as np
 from sklearn import datasets
 from sklearn import metrics 
-from sklearn.tree import DecisionTreeClassifier as SKDecisionTree
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.datasets import make_classification
 import matplotlib.pyplot as plt
 
 trainX = 0

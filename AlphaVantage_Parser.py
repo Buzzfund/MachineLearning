@@ -1,3 +1,10 @@
+#
+# Notice: usage discontinued due to AlphaVantage call limits
+# https://www.alphavantage.co/
+# Script for data collection
+# Felix Hu
+################################################################
+
 import numpy as np 
 import pandas as pd 
 
