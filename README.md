@@ -22,11 +22,11 @@ Meant to output chance of upward movement in 1 week. Will likely use regression 
 
 ### Data format
 
-*x = Sector, EPS, P/E, Current Ratio, Zack Rank, RSI, 1 Week Volume, 1 Month Volume, 2 Week Gain, 1 Week Gain, 1 Month Gain, Greeks.*
-*y = 1 week movement*
+*x = Sector, Stock rank, RSI, Average volume-week, Average volume-month, Average price over 10 days, Average price over 5 days, (Open - Close)/Open, (High - Low)/Low, Standard deviation of returns over 5 days, Average returns over 5 days, Greeks, Volume/(Open Interest)*
 
-In order for movement to be considered positive, it must surpass a threshold positive movement. i.e. +1.5%
+*y = +1 for gain over next 3 days, otherwise -1*
+
 
 ## Logistic regression
 
-Same purpose as random forest. Goal is to use L1--ridge--regularization for feature selection. Regardless of hypothesis efficacy, we can try to rule out useless metrics in analyzing stock performance by virtue of ridge regularization.
+Same purpose as random forest. Goal is to use L1 ridge regularization for feature selection. Regardless of hypothesis efficacy, we can try to rule out useless metrics in analyzing stock performance by virtue of ridge regularization.

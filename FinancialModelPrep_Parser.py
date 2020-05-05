@@ -8,7 +8,9 @@ import pandas as pd
 from urllib.request import urlopen
 import json
 
-data = dict()
+columns = list() # hold key values in 'data', used to write to CSV file
+data = dict() # hold historical data
+currPrice = dict() # hold current pricing data, used for testing
 
 def getTechTickers(file):
     tickers = pd.read_csv(file, header = None)
@@ -36,14 +38,16 @@ def indexListByThree(arr):
     if residual != 0:
         ret.append(arr[len(arr)-residual:])
     return ret
-    
 
 def getSector(tickers):
     # Note: Financial Modeling Prep only allows 3 tickers at a time
     
+    # update columns
+    if "sector" not in columns:
+        columns.append("sector")
+
     split_tickers = indexListByThree(tickers)
 
-    ount = 0
     ori_len = len(tickers)
     for i in range(0, len(split_tickers)):
         sublist = split_tickers[i]
@@ -60,11 +64,49 @@ def getSector(tickers):
         for i in range(0, len(profiles)):
             data[profiles[i]['symbol']]["sector"] = profiles[i]['profile']['sector']
 
-
 def getHistoricalDailyPrice(tickers):
-    url = "https://financialmodelingprep.com/api/v3/historical-price-full/"
-    url = url + ','.join(tickers)
-    fetched_data = getJSONFrom(url)
+
+    split_tickers = indexListByThree(tickers)
+    ori_len = len(tickers)
+    for i in range(0, len(split_tickers)):
+        sublist = split_tickers[i]
+        print("Index "+str(min(i*3, ori_len))+"/"+str(ori_len)+": "+str(sublist), end="\r")
+        url = "https://financialmodelingprep.com/api/v3/historical-price-full/"        
+        url = url + ','.join(sublist)
+        fetched_data = getJSONFrom(url)
+        profiles = dict()
+        if len(sublist) > 1: 
+            profiles = fetched_data['companyProfiles']
+        else:
+            profiles = [fetched_data]
+        #print(profiles)
+        for i in range(0, len(profiles)):
+            data[profiles[i]['symbol']]["sector"] = profiles[i]['profile']['sector']
+
+def getRating(tickers):
+    split_tickers = indexListByThree(tickers)
+    ori_len = len(tickers)
+    for i in range(0, len(split_tickers)):
+        sublist = split_tickers[i]
+        print("Index "+str(min(i*3, ori_len))+"/"+str(ori_len)+": "+str(sublist), end="\r")
+        url = "https://financialmodelingprep.com/api/v3/historical-price-full/"        
+        url = url + ','.join(sublist)
+        fetched_data = getJSONFrom(url)
+        profiles = dict()
+        if len(sublist) > 1: 
+            profiles = fetched_data['companyProfiles']
+        else:
+            profiles = [fetched_data]
+        #print(profiles)
+        for i in range(0, len(profiles)):
+            data[profiles[i]['symbol']]["sector"] = profiles[i]['profile']['sector']
+
+def getCurrPrice(tickers):
+    url = "https://financialmodelingprep.com/api/v3/stock/real-time-price/"
+    url = url + ",".join(tickers)
+    data = getJSONFrom(url)['companiesPriceList']
+    for entry in data:
+        currPrice[entry['symbol']] = entry['price']
 
 
 def main():
@@ -76,7 +118,9 @@ def main():
         data[ticker] = dict()
 
     print("Fetching ticker sectors...")
-    getSector(tickers)
+    #getSector(tickers)
+
+    #getCurrPrice(tickers)
 
     #print(indexListByThree(tickers))
 
