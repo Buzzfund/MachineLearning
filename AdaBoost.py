@@ -47,7 +47,7 @@ data = np.array(data)
 
 train_data, test_data, train_labels, test_labels = train_test_split(data, labels, test_size = 0.1, random_state = 1337)
 
-class_weight = {1:10, 0:1}
+class_weight = "balanced"
 
 print('Training Features Shape:', train_data.shape)
 print('Training Labels Shape:', train_labels.shape)
@@ -57,7 +57,7 @@ print('Sample weights: '+ str(compute_sample_weight(class_weight=class_weight, y
 
 # STEP 1 Training
 
-ada = AdaBoostClassifier(DecisionTreeClassifier(max_depth=2), n_estimators=1000)
+ada = AdaBoostClassifier(DecisionTreeClassifier(max_depth=2), n_estimators=1250)
 #ada.fit(train_data, train_labels, sample_weight=compute_sample_weight(class_weight="balanced", y=train_labels))
 ada.fit(train_data, train_labels, sample_weight=compute_sample_weight(class_weight=class_weight, y=train_labels))
 #ada.fit(train_data, train_labels)
