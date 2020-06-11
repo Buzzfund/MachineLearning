@@ -26,6 +26,13 @@ Preliminary results: similar to random forest, boosting is not great. It's sligh
 
 TODO: try to customize the loss function to add importance to false positives (https://www.google.com/search?q=sklearn+change+loss+function&oq=sklearn+change+loss+fun&aqs=chrome.0.0j69i57j0l2.2437j0j4&sourceid=chrome&ie=UTF-8)
 
+## Gradient Boost
+
+Able to hit max 29% on P125L30, 39% on P70L30
+
+SingleType, CALLS only, maxdepth 4, 2750 trees: ~42-44%
+SingleType, PUTS only: 
+
 ## Logistic Regression
 
 Same purpose as random forest. Goal is to use L1 ridge regularization for feature selection. Regardless of hypothesis efficacy, we can try to rule out useless metrics in analyzing stock performance by virtue of ridge regularization.

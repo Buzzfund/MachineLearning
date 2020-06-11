@@ -21,6 +21,7 @@ import pickle # model persistence
 data = pd.read_csv('sqlite_data_ML_iterativeBuild.csv')
 
 # Features we don't care about
+del data["id"]
 del data["option_expiration"]
 del data["flow_ticker"]
 del data["flow_order_time"]
@@ -46,11 +47,12 @@ print(data.head(5))
 feature_list = list(data.columns)
 data = np.array(data)
 
-train_data, test_data, train_labels, test_labels = train_test_split(data, labels, test_size = 0.1, random_state = 1337)
+train_data, test_data, train_labels, test_labels = train_test_split(data, labels, test_size = 0.1)
 
 # normalization
-train_data = preprocessing.normalize(train_data)
-test_data = preprocessing.normalize(test_data)
+scale = preprocessing.StandardScaler().fit(train_data)
+train_data = scale.transform(train_data)
+test_data = scale.transform(test_data)
 
 class_weight = "balanced"
 

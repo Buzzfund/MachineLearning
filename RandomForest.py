@@ -19,6 +19,7 @@ import pickle # model persistence
 data = pd.read_csv('sqlite_data_ML_iterativeBuild.csv')
 
 # Features we don't care about
+del data["id"]
 del data["option_expiration"]
 del data["flow_ticker"]
 del data["flow_order_time"]
